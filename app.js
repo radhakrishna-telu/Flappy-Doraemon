@@ -19,9 +19,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function control(e) {
         if (e.keyCode === 32) {
+            makesound()
             jump()
         }
     }
+    function makesound() {
+        // Define the path to your sound file
+        const soundPath = "assets/makesound2.mp3";
+        // Create a new Audio object
+        const audioElement = new Audio(soundPath);
+        audioElement.play();
+    }
+
 
     function jump() {
         if (birdBottom < 500) birdBottom += 50
@@ -74,12 +83,30 @@ document.addEventListener('DOMContentLoaded', () => {
     generateObstacle()
 
 
+
+    let isSoundPlayed = false;
+
     function gameOver() {
-        clearInterval(gameTimerId)
-        console.log('game over')
-        isGameOver = true
-        document.removeEventListener('keyup', control)
-        ground.classList.add('ground')
-        ground.classList.remove('ground-moving')
+        clearInterval(gameTimerId);
+        console.log('game over');
+        isGameOver = true;
+        document.removeEventListener('keyup', control);
+        ground.classList.add('ground');
+        ground.classList.remove('ground-moving');
+
+        // Play the crash sound only once
+        if (!isSoundPlayed) {
+            const soundPath1 = "assets/bruh.mp3";
+            const audioElement1 = new Audio(soundPath1);
+            audioElement1.play();
+            isSoundPlayed = true;
+        }
     }
+
+
+
+    //function crash() {
+    //    // Define the path to your sound file
+    //    
+    //}
 })
